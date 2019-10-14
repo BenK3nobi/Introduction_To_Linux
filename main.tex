@@ -134,7 +134,7 @@
         \subsection{... Ordnerbaum}
             \begin{frame}
           		\frametitle{Ordnerhierarchie/backups}
-        		\begin{minipage}{0.54\textwidth}
+        		\begin{center}
         		    \begin{tikzpicture}
         		        \node{/ }[edge from parent fork down]
                         child{node[rectangle,draw=white]{bin}}
@@ -155,13 +155,48 @@
                         child{node[rectangle,draw=white]{var}}
                         ;
         		    \end{tikzpicture}
-        		\end{minipage}
-        		\begin{minipage}{0.44\textwidth}
+        		\end{center}
+        		\begin{minipage}{0.9\textwidth}
         		    \begin{itemize}
-        		        \item 
+        		        \item Klare Struktur, überall gleich
+        		        \item user space klar definiert (home)
         		    \end{itemize}
         		\end{minipage}%
         	\end{frame}
+        	
+        	\begin{frame}
+          		\frametitle{Ordnerhierarchie/backups}
+        		\begin{center}
+        		    \begin{tikzpicture}
+        		        \node{/ }[edge from parent fork down]
+                        child{node[rectangle,draw=white]{bin}}
+                        child{node[rectangle,draw=white]{etc}}
+                        child{node[rectangle,draw=white]{home}
+                            child{node[rectangle,draw=white]{user1}}
+                            child{node[rectangle,draw=white]{user2}}
+                            child{node[rectangle,draw=white]{user3}}}
+                        child{node[rectangle,draw=white]{lib}}
+                        child{node[rectangle,draw=white]{root}}
+                        child{node[rectangle,draw=white]{tmp}}
+                        child{node[rectangle,draw=white]{usr}
+                            child{node[rectangle,draw=white]{bin}}
+                            child{node[rectangle,draw=white]{lib}}
+                            child{node[rectangle,draw=white]{local}
+                                child[rectangle,draw=white]{node[rectangle,draw=white]{bin}}
+                                child[rectangle,draw=white]{node[rectangle,draw=white]{lib}}}}
+                        child{node[rectangle,draw=white]{var}}
+                        ;
+        		    \end{tikzpicture}
+        		\end{center}
+        		\begin{minipage}{0.44\textwidth}
+        		    \begin{itemize}
+        		        \item[/:]
+        		        \item[bin:]
+        		        \item[etc:]
+        		    \end{itemize}
+        		\end{minipage}%
+        	\end{frame}
+        	
         	
         \subsection{... Nutzer}
             \begin{frame}
