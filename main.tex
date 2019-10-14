@@ -3,6 +3,7 @@
 \usepackage{amsmath,amssymb,amsfonts,dcolumn,color,graphicx,graphics,setspace,latexsym,setspace,lscape,subfigure,placeins,epsfig,hyperref}
 \usepackage{eulervm}
 \usepackage[utf8]{inputenc}
+\usepackage{csquotes}
 
 \usepackage{tikz}
 \usetikzlibrary{trees,shapes}
@@ -166,11 +167,12 @@
         	
         	\begin{frame}
           		\frametitle{Ordnerhierarchie/backups}
+          		\vspace{-1cm}
         		\begin{center}
         		    \begin{tikzpicture}
         		        \node{/ }[edge from parent fork down]
-                        child{node[rectangle,draw=white]{bin}}
-                        child{node[rectangle,draw=white]{etc}}
+                        child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{bin}}}
+                        child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{etc}}}
                         child{node[rectangle,draw=white]{home}
                             child{node[rectangle,draw=white]{user1}}
                             child{node[rectangle,draw=white]{user2}}
@@ -187,23 +189,99 @@
                         child{node[rectangle,draw=white]{var}}
                         ;
         		    \end{tikzpicture}
-        		\end{center}
-        		\begin{minipage}{0.44\textwidth}
+        		\end{center}%\vspace{-1cm}
+        		\begin{minipage}{0.99\textwidth}
         		    \begin{itemize}
-        		        \item[/:]
-        		        \item[bin:]
-        		        \item[etc:]
+        		        \item[/:] Wurzelverzeichnis
+        		        \item[bin:] Systemwichtige Binärdateien
+        		        \item[boot:] Dateien zum Starten/Teile des Kernels
+        		        \item[dev:] Gerätedateien, Schnittstellen zum Kernel, Kein Speicherbedarf
+        		        \item[etc:] Systemweite Einstellungen
         		    \end{itemize}
         		\end{minipage}%
         	\end{frame}
         	
+        	\begin{frame}
+          		\frametitle{Ordnerhierarchie/backups}
+          		\vspace{-1cm}
+        		\begin{center}
+        		    \begin{tikzpicture}
+        		        \node{/ }[edge from parent fork down]
+                        child{node[rectangle,draw=white]{bin}}
+                        child{node[rectangle,draw=white]{etc}}
+                        child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{home}}
+                            child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{user1}}}
+                            child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{user2}}}
+                            child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{user3}}}}
+                        child{node[rectangle,draw=white]{lib}}
+                        child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{root}}}
+                        child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{tmp}}}
+                        child{node[rectangle,draw=white]{usr}
+                            child{node[rectangle,draw=white]{bin}}
+                            child{node[rectangle,draw=white]{lib}}
+                            child{node[rectangle,draw=white]{local}
+                                child[rectangle,draw=white]{node[rectangle,draw=white]{bin}}
+                                child[rectangle,draw=white]{node[rectangle,draw=white]{lib}}}}
+                        child{node[rectangle,draw=white]{{var}}}
+                        ;
+        		    \end{tikzpicture}
+        		\end{center}
+        		\begin{minipage}{0.99\textwidth}
+        		    \begin{itemize}
+        		        \item[home:] home Verzeichnisse, kann auf anderer Partition liegen.
+        		        \item[user$x$:] Verzeichnis von $x$, volle Recht für den Nutzer!
+        		        \item[root:] home für den root Nutzer
+        		        \item[tmp:] temporäre Dateien, werden bei Start gelöscht 
+        		    \end{itemize}
+        		\end{minipage}%
+        	\end{frame}
+        	
+        	\begin{frame}
+          		\frametitle{Ordnerhierarchie/backups}
+          		\vspace{-1cm}
+        		\begin{center}
+        		    \begin{tikzpicture}
+        		        \node{/ }[edge from parent fork down]
+                        child{node[rectangle,draw=white]{bin}}
+                        child{node[rectangle,draw=white]{etc}}
+                        child{node[rectangle,draw=white]{{home}}
+                            child{node[rectangle,draw=white]{{user1}}}
+                            child{node[rectangle,draw=white]{{user2}}}
+                            child{node[rectangle,draw=white]{{user3}}}}
+                        child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{lib}}}
+                        child{node[rectangle,draw=white]{{root}}}
+                        child{node[rectangle,draw=white]{{tmp}}}
+                        child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{usr}}
+                            child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{bin}}}
+                            child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{lib}}}
+                            child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{local}}
+                                child {node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{bin}}}
+                                child {node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{lib}}}}}
+                        child{node[rectangle,draw=white, fill=blue!20]{\textcolor{black}{var}}}
+                        ;
+        		    \end{tikzpicture}
+        		\end{center}
+        		\begin{minipage}{0.99\textwidth}
+        		    \begin{itemize}
+        		        \item[lib:] system bibliotheken.
+        		        \item[usr:] \enquote{Unix System Resources}
+        		        \item[local:] selbstkompilierte Programme
+        		        \item[var:] Häufig neugeschriebene Programmdateien (logs)
+        		    \end{itemize}
+        		\end{minipage}%
+        	\end{frame}
         	
         \subsection{... Nutzer}
             \begin{frame}
           		\frametitle{User/root}
-        		\begin{minipage}{0.44\textwidth}
+        		\begin{minipage}{0.9\textwidth}
+        		    \begin{itemize}
+        		        \item Linux ist ein Multiusersystem. (Windows nicht...)
+        		        \item Der root user existiert immer, (ID = 0)
+        		        \item Beliebig viele User können existieren und parallel arbeiten.
+        		    \end{itemize}
+        		\end{minipage} 
         		
-        		\end{minipage}%
         		\begin{minipage}{0.54\textwidth}
         		
         		\end{minipage}
