@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 
 \usepackage{tikz}
-\usetikzlibrary{trees}
+\usetikzlibrary{trees,shapes}
 \usetheme{Kalgan}
 
 
@@ -102,13 +102,33 @@
     	\end{frame}
         \subsection{... Konzeptionell}
             \begin{frame}
-          		\frametitle{Kernel/Hardware/Userland}
-        		\begin{minipage}{0.44\textwidth}
-        		
-        		\end{minipage}%
-        		\begin{minipage}{0.54\textwidth}
-        		
-        		\end{minipage}
+          		\frametitle{Kernel/Hardware/User space}
+                \begin{center}
+            		\begin{minipage}{0.54\textwidth}
+            		    \begin{tikzpicture}
+            		        \draw[fill=green] (-3,3) rectangle (3,1);
+            		        \draw[fill=blue] (-3,1) rectangle (3,-1);
+            		        \draw[fill=red] (-3,-1) rectangle (3,-3);
+            		        % Enter label
+            		        \node at (0,2.5) {\textcolor{black}{\textbf{User space}}};
+            		        \node at (0,1.8) {\textcolor{black}{\small{Anwendungen}}};
+            		        \node at (0,0) {\textcolor{white}{\textbf{Kernel}}};
+            		        \node at (0,-2.5) {\textcolor{black}{\textbf{Hardware}}};
+            		        % Pfeile
+            		        \node[draw,fill, shape=double arrow,rotate=90] at (-2,+1) {-- --}; 
+            		        \node[draw,fill, shape=double arrow,rotate=90] at (0,+1) {-- --};
+            		        \node[draw,fill, shape=double arrow,rotate=90] at (+2,+1) {-- --};
+            		        
+            		        \node[draw,fill, shape=double arrow,rotate=90] at (-2,-1) {-- -- --}; 
+            		        \node[draw,fill, shape=double arrow,rotate=90] at (0,-1) {-- -- --};
+            		        \node[draw,fill, shape=double arrow,rotate=90] at (+2,-1) {-- -- --};
+            		        %Treiber:
+            		        \node[rectangle, fill=yellow] at(-2,-1) {\textcolor{black}{Treiber}};
+            		        \node[rectangle, fill=yellow] at(0,-1) {\textcolor{black}{Treiber}};
+            		        \node[rectangle, fill=yellow] at(2,-1) {\textcolor{black}{Treiber}};
+            		    \end{tikzpicture}
+            		\end{minipage}
+        		\end{center}
         	\end{frame}
         	
         \subsection{... Ordnerbaum}
